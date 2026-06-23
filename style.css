@@ -10,3 +10,34 @@ header{
     padding: 10px 0;
     text-align: center;
 }
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.room-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fff;
+    text-align: center;
+}
+
+.room-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.room-card h3 {
+    margin: 10px 0 5px;
+}
+
+.room-card p {
+    font-size: 14px;
+    color: #555;
+}
