@@ -7,18 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Shama's Hotel</h1>
-    
-    <nav class="navbar">
+   <header class="header">
+    <h1>Welcome to Shama's Hotel</h1>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="navbar" id="navbar">
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#rooms">Rooms</a></li>
             <li><a href="#dining">Dining</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-    </nav> 
-    </header>
+    </nav>
+</header>
     <br><br><br><br> <br> <br>
     <main>
         <section id="home">
@@ -96,5 +98,7 @@
             </article>
         </section>  
     </main> 
+
+ <script src="index.js"></script>
 </body>
 </html>

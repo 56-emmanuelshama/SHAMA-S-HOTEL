@@ -19,6 +19,33 @@ header {
     width:100%;
     z-index:1000;
 }
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* MOBILE ONLY */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar.active {
+        display: block;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
 nav ul {
     list-style-type: none;
     padding: 10px;
@@ -38,7 +65,7 @@ nav ul {
 
 .rooms-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
@@ -67,6 +94,12 @@ nav ul {
 .room-card:hover img {
     animation: spinThenGrow 3s forwards;
     z-index: 10;
+}
+.room-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 /* keyframes: rotate first, then stay bigger */
