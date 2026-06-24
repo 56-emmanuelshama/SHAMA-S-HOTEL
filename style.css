@@ -141,3 +141,28 @@ nav ul {
     font-size: 14px;
     color: #555;
 }
+#rooms h1 {
+    text-align: center;
+}
+#rooms p {
+    max-width: 40%;
+    text-decoration: dotted;
+    margin-left: 31%;
+}
+#home h1{
+    text-align: center;
+}
+#home p{ 
+    max-width: 40% ;
+    text-decoration: dotted;
+    margin-left: 31%;
+}
+#dining h1 {
+text-align: center;
+}
+#dining p {
+    max-width: 40%;
+    text-decoration: dotted;
+    margin-left: 31%;
+}
+
