@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Booking Form</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a2a4a 0%, #0f3460 60%, #16213e 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding: 2rem 1rem;
+    }
+ 
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+    }
+ 
+    .card-header {
+      background: linear-gradient(135deg, #0f3460, #1a2a4a);
+      padding: 2rem 2rem 1.75rem;
+      text-align: center;
+      color: #fff;
+    }
+ 
+    .card-header .hotel-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+ 
+    .card-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.25rem;
+    }
+ 
+    .card-header p {
+      font-size: 0.875rem;
+      opacity: 0.75;
+    }
+ 
+    .card-body {
+      padding: 2rem;
+    }
+ 
+    .field {
+      margin-bottom: 1.25rem;
+    }
+ 
+    .field label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+ 
+    .field label .emoji {
+      font-size: 1rem;
+      line-height: 1;
+    }
+ 
+    .field label .optional {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #9ca3af;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-left: 2px;
+    }
+ 
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 0.65rem 0.875rem;
+      font-size: 0.9375rem;
+      color: #111827;
+      background: #f9fafb;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+ 
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #9ca3af;
+    }
+ 
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #0f3460;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.12);
+    }
+ 
+    .field input.error,
+    .field select.error,
+    .field textarea.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+ 
+    .field .error-msg {
+      display: none;
+      font-size: 0.75rem;
+      color: #ef4444;
+      margin-top: 4px;
+    }
+ 
+    .field .error-msg.visible {
+      display: block;
+    }
+ 
+    .select-wrap {
+      position: relative;
+    }
+ 
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #6b7280;
+      pointer-events: none;
+    }
+ 
+    .select-wrap select {
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+ 
+    .field textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.55;
+    }
+ 
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+ 
+    .divider {
+      border: none;
+      border-top: 1px solid #f3f4f6;
+      margin: 1.5rem 0 1.75rem;
+    }
+ 
+    .submit-wrap {
+      display: flex;
+      justify-content: center;
+    }
+ 
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.8rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #0f3460, #1a5276);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 18px rgba(15, 52, 96, 0.38);
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    }
+ 
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 52, 96, 0.45);
+      filter: brightness(1.1);
+    }
+ 
+    .submit-btn:active {
+      transform: translateY(0) scale(0.97);
+      box-shadow: 0 2px 8px rgba(15, 52, 96, 0.3);
+    }
+ 
+    .submit-btn .btn-icon {
+      font-size: 1.15rem;
+    }
+ 
+    .toast {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 0.75rem 1rem;
+      background: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      border-radius: 10px;
+      color: #065f46;
+      font-size: 0.875rem;
+      text-align: center;
+      font-weight: 500;
+    }
+ 
+    @media (max-width: 480px) {
+      .row { grid-template-columns: 1fr; gap: 0; }
+      .card-body { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <div class="card">
+    <div class="card-header">
+      <div class="hotel-icon">🏨</div>
+      <h1>Room Booking</h1>
+      <p>Fill in your details to reserve your stay</p>
+    </div>
+ 
+    <div class="card-body">
+ 
+      <!-- Full Name -->
+      <div class="field">
+        <label><span class="emoji">👤</span> Full Name</label>
+        <input type="text" id="full-name" placeholder="e.g. Jane Smith" autocomplete="name" />
+        <span class="error-msg" id="err-name">Please enter your full name.</span>
+      </div>
+ 
+      <!-- Email -->
+      <div class="field">
+        <label><span class="emoji">📧</span> Email</label>
+        <input type="email" id="email" placeholder="e.g. jane@example.com" autocomplete="email" />
+        <span class="error-msg" id="err-email">Please enter a valid email address.</span>
+      </div>
+ 
+      <!-- Phone -->
+      <div class="field">
+        <label><span class="emoji">📞</span> Phone Number</label>
+        <input type="tel" id="phone" placeholder="e.g. +254 700 000 000" autocomplete="tel" />
+        <span class="error-msg" id="err-phone">Please enter your phone number.</span>
+      </div>
+ 
+      <!-- Room Type & Guests -->
+      <div class="row">
+        <div class="field">
+          <label><span class="emoji">🛏️</span> Room Type</label>
+          <div class="select-wrap">
+            <select id="room-type">
+              <option value="" disabled selected>Select room</option>
+              <option value="single">Single</option>
+              <option value="double">Double</option>
+              <option value="twin">Twin</option>
+              <option value="suite">Suite</option>
+              <option value="deluxe">Deluxe</option>
+              <option value="family">Family</option>
+            </select>
+          </div>
+          <span class="error-msg" id="err-room">Please select a room type.</span>
+        </div>
+ 
+        <div class="field">
+          <label><span class="emoji">👥</span> Guests</label>
+          <input type="number" id="guests" placeholder="e.g. 2" min="1" max="10" />
+          <span class="error-msg" id="err-guests">Enter number of guests (1–10).</span>
+        </div>
+      </div>
+ 
+      <!-- Special Request -->
+      <div class="field">
+        <label>
+          <span class="emoji">📝</span> Special Request
+          <span class="optional">(optional)</span>
+        </label>
+        <textarea id="special-request" placeholder="e.g. Early check-in, sea view, extra pillows…"></textarea>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="submit-wrap">
+        <button class="submit-btn" onclick="handleSubmit()">
+          <span class="btn-icon">✅</span>
+          Submit Booking
+        </button>
+      </div>
+ 
+      <div class="toast" id="toast">
+        💬 Redirecting you to WhatsApp to confirm your booking…
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <script>
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+ 
+    function setError(inputId, errorId, show) {
+      const input = document.getElementById(inputId);
+      const msg   = document.getElementById(errorId);
+      if (show) {
+        input.classList.add('error');
+        msg.classList.add('visible');
+      } else {
+        input.classList.remove('error');
+        msg.classList.remove('visible');
+      }
+    }
+ 
+    function handleSubmit() {
+      const fullName       = document.getElementById('full-name').value.trim();
+      const email          = document.getElementById('email').value.trim();
+      const phone          = document.getElementById('phone').value.trim();
+      const roomType       = document.getElementById('room-type').value;
+      const guests         = parseInt(document.getElementById('guests').value, 10);
+      const specialRequest = document.getElementById('special-request').value.trim();
+ 
+      let valid = true;
+ 
+      if (!fullName) { setError('full-name', 'err-name', true);  valid = false; }
+      else            { setError('full-name', 'err-name', false); }
+ 
+      if (!email || !validateEmail(email)) { setError('email', 'err-email', true);  valid = false; }
+      else                                  { setError('email', 'err-email', false); }
+ 
+      if (!phone) { setError('phone', 'err-phone', true);  valid = false; }
+      else         { setError('phone', 'err-phone', false); }
+ 
+      if (!roomType) { setError('room-type', 'err-room', true);  valid = false; }
+      else            { setError('room-type', 'err-room', false); }
+ 
+      if (!guests || guests < 1 || guests > 10) { setError('guests', 'err-guests', true);  valid = false; }
+      else                                        { setError('guests', 'err-guests', false); }
+ 
+      if (!valid) return;
+ 
+      // Build WhatsApp message with all booking details
+      const roomLabel = document.getElementById('room-type').options[document.getElementById('room-type').selectedIndex].text;
+      const message = 
+        `🏨 *New Room Booking Request*\n\n` +
+        `👤 *Full Name:* ${fullName}\n` +
+        `📧 *Email:* ${email}\n` +
+        `📞 *Phone:* ${phone}\n` +
+        `🛏️ *Room Type:* ${roomLabel}\n` +
+        `👥 *Number of Guests:* ${guests}\n` +
+        (specialRequest ? `📝 *Special Request:* ${specialRequest}\n` : '') +
+        `\nPlease confirm my booking. Thank you!`;
+ 
+      const waNumber = '254707761326'; // Kenya country code +254, removing leading 0
+      const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+ 
+      // Show toast then open WhatsApp
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+ 
+      window.open(waURL, '_blank');
+ 
+      // Reset form
+      document.getElementById('full-name').value       = '';
+      document.getElementById('email').value           = '';
+      document.getElementById('phone').value           = '';
+      document.getElementById('room-type').value       = '';
+      document.getElementById('guests').value          = '';
+      document.getElementById('special-request').value = '';
+    }
+  </script>
+ 
+</body>
+</html>
